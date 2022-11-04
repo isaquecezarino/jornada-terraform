@@ -14,10 +14,10 @@ provider "digitalocean" {
 
 # Create a new Web Droplet in the nyc3 region
 resource "digitalocean_droplet" "jenkins" {
-  image    = "ubuntu-20-04-x64"
+  image    = "almalinux-9-x64"
   name     = "jenkins"
   region   = var.region
-  size     = "s-2vcpu-2gb"
+  size     = "s-1vcpu-1gb"
   ssh_keys = [data.digitalocean_ssh_key.ssh_key_name.id]
 }
 
@@ -54,6 +54,12 @@ variable "ssh_key_name" {
 output "jenkinsIP" {
   value       = digitalocean_droplet.jenkins.ipv4_address
   description = "Jenkins IP"
+}
+
+resource "local_file" "jenkinsIP" {
+  content = digitalocean_droplet.jenkins.ipv4_address
+  filename = "JenkinsIP.txt"
+
 }
 
 resource "local_file" "kubeconfig" {

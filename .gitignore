@@ -1,3 +1,4 @@
 *.tfvars
 kube_config.yaml
 *.tfstate.*
+terraform.lock.hcl

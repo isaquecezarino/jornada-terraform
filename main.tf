@@ -12,7 +12,7 @@ provider "digitalocean" {
   token = var.dotoken
 }
 
-# Create a new Web Droplet in the nyc2 region
+# Create a new Web Droplet in the nyc3 region
 resource "digitalocean_droplet" "jenkins" {
   image    = "ubuntu-20-04-x64"
   name     = "jenkins"
@@ -38,6 +38,7 @@ resource "digitalocean_kubernetes_cluster" "k8s" {
   }
 }
 
+# as variaveis abaixo estao no arquivo terraform.tfvars que não foi enviado ao github por questao de seguranca
 variable "region" {
   default = ""
 }
@@ -55,7 +56,7 @@ output "jenkinsIP" {
   description = "Jenkins IP"
 }
 
-resource "local_file" "foo" {
+resource "local_file" "kubeconfig" {
     content  = digitalocean_kubernetes_cluster.k8s.kube_config.0.raw_config
     filename = "kube_config.yaml"
 }

@@ -1,6 +1,6 @@
 *.tfvars
 kube_config.yaml
-*.tfstate.*
+*tfstate*
 .terraform.lock.hcl
 .terraform/
 JenkinsIP.txt
